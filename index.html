@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WeatherPulse</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <span class="icon"><i class="fas fa-cloud"></i></span>
+      <span><strong>Weather</strong><span style="color: #a78bfa">Pulse</span></span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#forecast">Forecast</a></li>
+        <li><a href="#map">Maps</a></li>
+        <li><a href="#ai">AI Assistant</a></li>
+      </ul>
+    </nav>
+    <div class="top-search">
+      <input type="text" placeholder="Search location..." />
+      <i class="fas fa-microphone"></i>
+      <button id="themeToggle" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ALERT -->
+  <div class="alert-banner">
+    <i class="fas fa-cloud-bolt"></i>
+    Heavy rain expected tonight. Potential flash flooding in low-lying areas.
+    <span class="close-alert" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+
+ 
+<!-- HERO -->
+<div class="container">
+    <main class="hero" id="home">
+      <h1><span>Real-Time</span> Weather <br /><span>Intelligence</span></h1>
+      <p>Accurate forecasts powered by AI, helping you plan your day with confidence</p>
+  
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search for a location..." />
+        <i class="fas fa-microphone"></i>
+      </div>
+      <p class="hint">Try: "New York", "Paris", or "Current Location"</p>
+  
+      <!-- ACTION BUTTONS -->
+      <div class="buttons">
+        <button class="btn blue">See Detailed Forecast</button>
+        <button class="btn purple">Ask AI Assistant</button>
+      </div>
+    </main>
+  </div>
+  
+ <!-- FEATURED LOCATIONS -->
+<div class="container">
+    <section class="featured-locations" id="forecast">
+      <h2>Featured Locations</h2>
+      <div class="location-cards">
+        <!-- Card 1 -->
+        <div class="weather-card">
+          <div class="card-header">
+            <div>
+              <h3>New York</h3>
+              <p>Today, May 4</p>
+            </div>
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h1>72°</h1>
+          <p>Cloudy</p>
+          <div class="card-stats">
+            <div><i class="fas fa-tint"></i><p>Humidity<br /><strong>65%</strong></p></div>
+            <div><i class="fas fa-wind"></i><p>Wind<br /><strong>8 mph</strong></p></div>
+            <div><i class="fas fa-cloud-showers-heavy"></i><p>Rain<br /><strong>20%</strong></p></div>
+          </div>
+          <div class="card-buttons">
+            <button>Hourly Forecast</button>
+            <button>Details</button>
+          </div>
+        </div>
+  
+        <!-- Card 2 -->
+        <div class="weather-card">
+          <div class="card-header">
+            <div>
+              <h3>London</h3>
+              <p>Today, May 4</p>
+            </div>
+            <i class="fas fa-cloud-showers-heavy"></i>
+          </div>
+          <h1>58°</h1>
+          <p>Rainy</p>
+          <div class="card-stats">
+            <div><i class="fas fa-tint"></i><p>Humidity<br /><strong>80%</strong></p></div>
+            <div><i class="fas fa-wind"></i><p>Wind<br /><strong>12 mph</strong></p></div>
+            <div><i class="fas fa-cloud-showers-heavy"></i><p>Rain<br /><strong>75%</strong></p></div>
+          </div>
+          <div class="card-buttons">
+            <button>Hourly Forecast</button>
+            <button>Details</button>
+          </div>
+        </div>
+  
+        <!-- Card 3 -->
+        <div class="weather-card">
+          <div class="card-header">
+            <div>
+              <h3>Tokyo</h3>
+              <p>Today, May 4</p>
+            </div>
+            <i class="fas fa-sun" style="color: gold;"></i>
+          </div>
+          <h1>81°</h1>
+          <p>Sunny</p>
+          <div class="card-stats">
+            <div><i class="fas fa-tint"></i><p>Humidity<br /><strong>50%</strong></p></div>
+            <div><i class="fas fa-wind"></i><p>Wind<br /><strong>5 mph</strong></p></div>
+            <div><i class="fas fa-cloud-showers-heavy"></i><p>Rain<br /><strong>0%</strong></p></div>
+          </div>
+          <div class="card-buttons">
+            <button>Hourly Forecast</button>
+            <button>Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  
+  <!-- CHART SECTION -->
+  <div class="container">
+    <section class="chart-section">
+        <h2 style="text-align: center;">7-Day Weather Trends</h2>
+      <div class="chart-tabs">
+        <button class="tab-btn active">Humidity</button>
+        <button class="tab-btn">Temperature</button>
+        <button class="tab-btn">Precipitation</button>
+      </div>
+      <div class="chart-container">
+        <canvas id="weatherChart" style="height: 300px;"></canvas>
+      </div>
+    </section>
+  </div>
+  
+  <!-- AI ASSISTANT -->
+  <div class="container">
+    <section class="ai-assistant" id="ai">
+      <h2><i class="fa-solid fa-cloud"></i> AI Weather Assistant</h2>
+      <p>Our AI analyzes weather data to provide personalized recommendations for your day</p>
+      
+      <div class="ai-cards">
+        <div class="ai-card">
+          <div class="ai-icon"><i class="fa-solid fa-shirt"></i></div>
+          <h3>What to Wear</h3>
+          <p>Light jacket recommended. It's mild but may get cooler in the evening.</p>
+          <a href="#">More Details</a>
+        </div>
+      
+        <div class="ai-card">
+          <div class="ai-icon"><i class="fa-solid fa-umbrella"></i></div>
+          <h3>Umbrella Needed?</h3>
+          <p>20% chance of rain this afternoon. Bring a small umbrella to be safe.</p>
+          <a href="#">More Details</a>
+        </div>
+      
+        <div class="ai-card">
+          <div class="ai-icon"><i class="fa-solid fa-person-running"></i></div>
+          <h3>Outdoor Activities</h3>
+          <p>Good day for outdoor activities until 4 PM, when clouds and potential showers arrive.</p>
+          <a href="#">More Details</a>
+        </div>
+      
+        <div class="ai-card">
+          <div class="ai-icon"><i class="fa-solid fa-wind"></i></div>
+          <h3>Air Quality</h3>
+          <p>Air quality is good today with a UV index of 3 (moderate). Sunscreen recommended.</p>
+          <a href="#">More Details</a>
+        </div>
+      </div>
+      
+      
+          
+      </div>
+    </section>
+  </div>
+  
+  <!-- WEATHER MAP -->
+  <div class="container">
+    <section class="weather-map-section" id="map">
+      <div class="map-wrapper">
+        <h2>Weather Map</h2>
+        <div class="map-card">
+          <h3>Interactive Weather Map</h3>
+          <div class="map-buttons">
+            <button class="active">Radar</button>
+            <button>Satellite</button>
+            <button>Temperature</button>
+          </div>
+          <div class="map-display">Interactive radar map would be displayed here</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+    
+
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboard-section" class="content-section dashboard-container">
+      <!-- Dynamic Dashboard Cards (Weather, UV, Air Quality, Radar...) -->
+    </section>
+  </main>
+
+  <!-- WAVE DIVIDER -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,0 C480,80 960,0 1440,80 L1440,120 L0,120 Z" fill="var(--footer-bg)"></path>
+    </svg>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <i class="fas fa-cloud"></i>
+          <span><strong>Weather</strong><span style="color: #a78bfa;">Pulse</span></span>
+        </div>
+        <p>Accurate forecasts powered by AI, helping you plan your day with confidence.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#forecast">Forecast</a></li>
+          <li><a href="#map">Weather Maps</a></li>
+          <li><a href="#ai">AI Assistant</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p><i class="fas fa-envelope"></i> support@weatherpulse.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Forecast Ave, Cloud City</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 WeatherPulse. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>
